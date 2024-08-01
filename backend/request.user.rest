@@ -1,0 +1,44 @@
+### User Routes
+### 00 Test
+GET http://localhost:5000/
+### 01 create new user
+
+### v1 -> version
+GET http://localhost:5000/api/v1
+###
+
+POST http://localhost:5000/api/v1/users/claim
+Content-Type: application/json
+
+{
+  "claimDate": "21/2/24",
+  "description": "traver",
+  "startDate": "12/2/24",
+  "endDate": "19/2/24",
+  "claimType": "bus",
+  "totalAmount": 2343.00
+
+}
+###
+POST http://localhost:5000/api/v1/users/claimItem
+Content-Type: application/json
+
+{
+  "claimId": 3,
+  "expenseCategory": "food",
+  "name": "biryani",
+  "amount": 8765.00,
+  "startDate": "2024-12-02",
+  "endDate": "2024-12-19"
+}
+
+###
+GET http://localhost:5000/api/v1/users/getClaims
+
+
+###
+GET http://localhost:5000/api/v1/users/getClaimItems
+### 
+
+GET http://localhost:5000/api/v1/users/getClaim/1
+###

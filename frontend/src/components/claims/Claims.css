@@ -1,0 +1,43 @@
+.home-buttons-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.claims-header {
+    height: 100vh;
+    padding: 20px;
+    
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabs-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.tab-button.active {
+    border-bottom: 2px solid #007bff; /* Highlight color */
+    color: #007bff; /* Text color for active tab */
+}
+
+.tab-button:not(.active):hover {
+    color: #0056b3; /* Text color on hover for inactive tabs */
+}
+.add-button{
+    width: 120px;
+    background-color: green;
+    border: 1px solid lightgreen;
+    border-radius: 5px;
+    height: 30px;
+}
