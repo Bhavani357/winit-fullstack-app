@@ -1,6 +1,5 @@
 /* -----> Third Party Packages <----- */
 const express = require("express");
-const dotenv = require("dotenv");
 const path = require("path");
 const cors = require("cors");
 
@@ -13,11 +12,6 @@ const app = express();
 /* -----> Middlewares <----- */
 app.use(express.json()); // Handle JSON data
 app.use(cors()); // CORS
-
-// Load environment variables
-dotenv.config({
-  path: path.join(__dirname, "../.env"),
-});
 
 /* -----> Routes <----- */
 // 00 Test

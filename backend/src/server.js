@@ -1,6 +1,6 @@
 const { connectDB } = require("./dbconfig/sqlite");
 const app = require("./app");
-// const UserModel = require("./api/v1/models/user.model");
+
 connectDB()
   .then(async (db) => {
     console.log("server connected to the database");
