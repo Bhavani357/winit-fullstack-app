@@ -14,7 +14,7 @@ const SavedClaims = () => {
     useEffect(() => {
         const fetchClaims = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/v1/users/getClaims');
+                const response = await axios.get('https://winit-task-backend-3.onrender.com/api/v1/users/getClaims');
                 setClaims(response.data.claims);
                 setFilteredClaims(response.data.claims);
             } catch (error) {
@@ -31,7 +31,7 @@ const SavedClaims = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/v1/users/deleteClaim/${id}`);
+            const response = await axios.delete(`https://winit-task-backend-3.onrender.com/api/v1/users/deleteClaim/${id}`);
             if (response.status === 200) {
                 setClaims(prevClaims => prevClaims.filter(claim => claim.id !== id));
                 setFilteredClaims(prevClaims => prevClaims.filter(claim => claim.id !== id));

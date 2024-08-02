@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa'; // Importing icons from react-icons
 import './SubmittedClaims.css'; // Add CSS for styling
+import { useNavigate } from 'react-router-dom';
 
 const SubmittedClaims = () => {
     const [claims, setClaims] = useState([]);
     const [filteredClaims, setFilteredClaims] = useState([]);
     const [filterDate, setFilterDate] = useState('');
     const [filterAmount, setFilterAmount] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch data when component mounts
         const fetchClaims = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/v1/users/getClaims');
-                console.log(response.data);
+                const response = await axios.get('https://winit-task-backend-3.onrender.com/api/v1/users/getClaims');
                 setClaims(response.data.claims);
                 setFilteredClaims(response.data.claims);
             } catch (error) {
@@ -25,27 +25,33 @@ const SubmittedClaims = () => {
         fetchClaims();
     }, []);
 
-    const handleEdit = (id) => {
-        console.log('Edit claim with ID:', id);
-        // Add your edit functionality here
+    const handleEdit = (claim) => {
+        navigate('/claimItems', { state: { claim } });
     };
 
-    const handleDelete = (id) => {
-        console.log('Delete claim with ID:', id);
-        // Add your delete functionality here
+    const handleDelete = async (id) => {
+        try {
+            const response = await axios.delete(`https://winit-task-backend-3.onrender.com/api/v1/users/deleteClaim/${id}`);
+            if (response.status === 200) {
+                setClaims(prevClaims => prevClaims.filter(claim => claim.id !== id));
+                setFilteredClaims(prevClaims => prevClaims.filter(claim => claim.id !== id));
+            } else {
+                console.error('Failed to delete claim');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     const handleFilterTable = () => {
         let filtered = claims;
 
-        // Filter by claim date
         if (filterDate) {
             filtered = filtered.filter(claim => 
                 new Date(claim.claimDate).toLocaleDateString() === new Date(filterDate).toLocaleDateString()
             );
         }
 
-        // Filter by amount
         if (filterAmount) {
             filtered = filtered.filter(claim => 
                 claim.totalAmount >= parseFloat(filterAmount)
@@ -94,7 +100,7 @@ const SubmittedClaims = () => {
                             <td>{claim.claimDate}</td>
                             <td>{claim.totalAmount}</td>
                             <td>
-                                <button onClick={() => handleEdit(claim.id)}>
+                                <button onClick={() => handleEdit(claim)}>
                                     <FaEdit />
                                 </button>
                                 <button onClick={() => handleDelete(claim.id)}>

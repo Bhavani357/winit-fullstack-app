@@ -66,7 +66,7 @@ const ClaimItems = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/v1/users/claimItem', {
+            const response = await fetch('https://winit-task-backend-3.onrender.com/api/v1/users/claimItem', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ const ClaimItems = () => {
 
     const fetchClaimItems = async (claimId) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/v1/users/getClaim/${claimId}`);
+            const response = await axios.get(`https://winit-task-backend-3.onrender.com/api/v1/users/getClaim/${claimId}`);
             console.log(response.data);
             setClaimItemsData(response.data.claim);
         } catch (error) {
@@ -98,7 +98,7 @@ const ClaimItems = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:5000/api/v1/users/deleteClaimItem/${id}`);
+            const response = await axios.delete(`https://winit-task-backend-3.onrender.com/api/v1/users/deleteClaimItem/${id}`);
             if (response.status === 200) {
                 console.log('Claim item deleted successfully');
                 fetchClaimItems(formData.claimId); // Refresh the list after deletion
